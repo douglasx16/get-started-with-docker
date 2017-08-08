@@ -27,6 +27,7 @@ sudo add-apt-repository \
    stable"
 
 # installing docker
+sudo apt-get update
 sudo apt-get install docker-ce
 
 ### run docker command without "sudo"

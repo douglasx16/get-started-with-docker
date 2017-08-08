@@ -9,4 +9,6 @@ ENV APACHE_LOG_DIR  = '/var/log/apache2' \
     APACHE_RUN_GROUP= 'www-data' \
     APACHE_RUN_USER = 'www-data'
 
-CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
+EXPOSE 80
+
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]

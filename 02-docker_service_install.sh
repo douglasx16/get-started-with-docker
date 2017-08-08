@@ -1,21 +1,37 @@
 ### Installing docker service
-# Reference: https://docs.docker.com/engine/installation/linux/ubuntulinux/
+# Reference: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
 
-sudo apt-get update
-sudo apt-get install apt-transport-https ca-certificates
-sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-vi /etc/apt/sources.list.d/docker.list
-deb https://apt.dockerproject.org/repo ubuntu-xenial main
-sudo apt-get update
-sudo apt-get purge lxc-docker
-sudo apt-get install docker-engine
-sudo service docker start
+# Removing old versions
+sudo apt-get remove docker docker-engine docker.io
 
-# test
-sudo docker run hello-world
+# Recommended extra packages
+sudo apt-get install \
+    linux-image-extra-$(uname -r) \
+    linux-image-extra-virtual
+sudo apt-get update
+
+# Packages to user https
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+# Docker key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+# Include Docker repo
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+# installing docker
+sudo apt-get install docker-ce
 
 ### run docker command without "sudo"
 sudo groupadd docker
 sudo usermod -aG docker $USER
-# test
+
+# testing
 docker run hello-world

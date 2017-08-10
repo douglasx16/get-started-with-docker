@@ -9,3 +9,6 @@ docker exec -u root -it nginx bash
 
 ### Execute bash on container for test and destroy after logout
 docker run -it --rm debian:jessie bash
+
+### Create and start Docker container with environment variables
+docker run -d -e MYENV=VALUE --name nginx_with_env nginx
